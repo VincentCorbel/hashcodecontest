@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collector;
@@ -57,8 +58,29 @@ public class Start {
 			
 			System.out.println(totalLibraries.toString());
 			
-			List<String> datas = Arrays.asList(linesFilesIn.get(1).split(FILE_SEPARATOR));
+			totalLibraries.stream().forEach(l -> l.setMaxAndProcess(days));
+			
+			totalLibraries = totalLibraries.stream().sorted(Comparator.comparing(Library::getRatio).reversed()).collect(Collectors.toList());
+			
+			List<Library> scannedLibraries = new ArrayList<>();
+			List<Book> scannedBooks = new ArrayList<>();
+			
+			AtomicInteger timeLeft = new AtomicInteger(days);
+			
+			scannedLibraries.add(totalLibraries.get(0));
+			
+			
+			
+			
+			System.out.println(totalLibraries.toString());
+			
 
+			
+			
+			
+			
+			
+			
 			List<String> result = new ArrayList<String>();
 			
 			// Start your code
