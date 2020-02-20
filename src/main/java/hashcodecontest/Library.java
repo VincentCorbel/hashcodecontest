@@ -120,8 +120,10 @@ public class Library {
 	public String toString() {
 		return "Library [id=" + id + ", nbBooks=" + nbBooks + ", books=" + books + ", signupProcess=" + signupProcess
 				+ ", nBookPerDay=" + nBookPerDay + ", processTime=" + processTime + ", maxScannableBooks="
-				+ maxScannableBooks + ", maxPossibleScore=" + maxPossibleScore + ", ratio=" + ratio + "]";
+				+ maxScannableBooks + ", maxPossibleScore=" + maxPossibleScore + ", ratio=" + ratio + ", scannedBooks="
+				+ scannedBooks + "]";
 	}
+
 	
 	
 }
