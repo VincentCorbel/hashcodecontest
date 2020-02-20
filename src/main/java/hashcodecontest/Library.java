@@ -115,8 +115,8 @@ public class Library {
 			System.out.println("size" +books.size());
 			books.subList(0, Math.min(maxScannableBooks-1, books.size()-1)).stream().forEach(b -> sum.addAndGet(b.getScore()));		
 			this.maxPossibleScore = sum.get();
-			
-			ratio = Double.valueOf(maxPossibleScore)/Double.valueOf(signupProcess);	
+			ratio = Double.valueOf(maxPossibleScore)/Double.valueOf(books.size());
+			//ratio = Double.valueOf(maxPossibleScore)/Double.valueOf(signupProcess);	
 		}
 		else {
 			

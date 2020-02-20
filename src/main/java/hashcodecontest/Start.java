@@ -12,17 +12,19 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class Start {
 
 	private final static String BASE_FOLDER = "C:\\hashcode";
 	private final static String BASE_FOLDER_IN = BASE_FOLDER + "\\in\\";
-	private final static String BASE_FOLDER_OUT = BASE_FOLDER + "\\out\\";
+	private final static String BASE_FOLDER_OUT = BASE_FOLDER + "\\out2\\";
 
 	private final static String FILE_SEPARATOR = " ";
 
-	private final static List<String> IN_FILE = Arrays.asList("c_incunabula.txt");
+	private final static List<String> IN_FILE = Arrays.asList("a_example.txt", "b_read_on.txt", "c_incunabula.txt",
+			"d_tough_choices.txt", "e_so_many_books.txt", "f_libraries_of_the_world.txt");
 
 	public static void main(String[] args) throws IOException {
 
@@ -83,6 +85,9 @@ public class Start {
 
 					List<Book> aScanner = notAlreadyScanned.subList(0,
 							Math.min(toScan - 1, notAlreadyScanned.size() - 1));
+					if (CollectionUtils.isEmpty(aScanner)) {
+						throw new Exception();
+					}
 					lib.getScannedBooks().addAll(aScanner);
 
 					scannedBooks.addAll(aScanner);
