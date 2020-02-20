@@ -107,14 +107,21 @@ public class Library {
 	
 	public void setMaxAndProcess(int days) {
 		this.processTime = days-signupProcess;
-		this.maxScannableBooks = processTime*nBookPerDay;
-		books = books.stream().sorted(Comparator.comparing(Book::getScore).reversed()).collect(Collectors.toList());
-		AtomicInteger sum = new AtomicInteger();
-		
-		books.subList(0, Math.min(maxScannableBooks-1, books.size()-1)).stream().forEach(b -> sum.addAndGet(b.getScore()));		
-		this.maxPossibleScore = sum.get();
-		
-		ratio = Double.valueOf(maxPossibleScore)/Double.valueOf(signupProcess);
+		if(processTime<1) {
+			this.maxScannableBooks = processTime*nBookPerDay;
+			books = books.stream().sorted(Comparator.comparing(Book::getScore).reversed()).collect(Collectors.toList());
+			AtomicInteger sum = new AtomicInteger();
+			System.out.println("maxscan " +maxScannableBooks);
+			System.out.println("size" +books.size());
+			books.subList(0, Math.min(maxScannableBooks-1, books.size()-1)).stream().forEach(b -> sum.addAndGet(b.getScore()));		
+			this.maxPossibleScore = sum.get();
+			
+			ratio = Double.valueOf(maxPossibleScore)/Double.valueOf(signupProcess);	
+		}
+		else {
+			
+			ratio=Double.valueOf(-1);
+		}
 	}
 	@Override
 	public String toString() {

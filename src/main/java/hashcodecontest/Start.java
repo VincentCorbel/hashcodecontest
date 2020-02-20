@@ -22,8 +22,7 @@ public class Start {
 
 	private final static String FILE_SEPARATOR = " ";
 
-	private final static List<String> IN_FILE = Arrays.asList("a_example.txt", "b_read_on.txt", "c_incunabula.txt",
-			"d_tough_choices.txt", "e_so_many_books.txt");
+	private final static List<String> IN_FILE = Arrays.asList("c_incunabula.txt");
 
 	public static void main(String[] args) throws IOException {
 
@@ -43,9 +42,9 @@ public class Start {
 			List<Book> totalBooks = bookLine.stream().map(b -> new Book(index.getAndIncrement(), Integer.parseInt(b)))
 					.collect(Collectors.toList());
 
-			System.out.println(
-					"total livre : " + nbTotalBook + " nb libraries : " + nbLibraries + " total temps : " + days);
-			System.out.println(totalBooks.toString());
+//			System.out.println(
+//					"total livre : " + nbTotalBook + " nb libraries : " + nbLibraries + " total temps : " + days);
+//			System.out.println(totalBooks.toString());
 
 			List<String> librariesLines = linesFilesIn.stream().skip(2).collect(Collectors.toList());
 			int indexLibrary = 0;
@@ -61,7 +60,7 @@ public class Start {
 				}
 			}
 
-			System.out.println(totalLibraries.toString());
+//			System.out.println(totalLibraries.toString());
 
 			totalLibraries.stream().forEach(l -> l.setMaxAndProcess(days));
 
@@ -75,7 +74,7 @@ public class Start {
 
 			for (Library lib : totalLibraries) {
 				if (timeLeft.get() > lib.getSignupProcess()) {
-
+					try {
 					timeLeft.addAndGet(-lib.getSignupProcess());
 					scannedLibraries.add(lib);
 					int toScan = timeLeft.get() * lib.getnBookPerDay();
@@ -87,12 +86,17 @@ public class Start {
 					lib.getScannedBooks().addAll(aScanner);
 
 					scannedBooks.addAll(aScanner);
+					}catch(Exception e) {
+						timeLeft.addAndGet(lib.getSignupProcess());
+						scannedLibraries.remove(lib);
+						
+					}
 				}
 
 			}
 
-			System.out.println(totalLibraries.toString());
-			System.out.println("scannés " + scannedLibraries.toString());
+//			System.out.println(totalLibraries.toString());
+//			System.out.println("scannés " + scannedLibraries.toString());
 
 			String linesresult = "";
 			for (Library librarie : scannedLibraries) {
